@@ -39,16 +39,30 @@ top:50%;
 left:50%;
 transform:translate(-50%, -50%);
 text-align:center;
-
-padding:30px;
-width:350px;
-
+padding:40px;
+width:420px;
 color:white;
+background:rgba(0,0,0,0.6); /* черный фон */
+backdrop-filter:blur(1px);
+border-radius:24px;
+border:2px solid rgba(88, 91, 99, 0.4);
+transform-style: preserve-3d;
+perspective: 1000px;
+transition: all 0.08s ease-out;
+animation: float 4s ease-in-out infinite;
+box-shadow: 0 15px 40px 0 rgba(0,0,0,0.5);
+}
 
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(10px);
-
-border-radius:20px;
+@keyframes float {
+0%{
+transform: translate(-50%, -50%) translateY(0px);
+}
+50%{
+transform: translate(-50%, -50%) translateY(-15px);
+}
+100%{
+transform: translate(-50%, -50%) translateY(0px);
+}
 }
 
 /* аватарка */
@@ -60,15 +74,7 @@ margin-bottom:15px;
 }
 
 /* логотип */
-.logo{
-width:10%;
 
-position: absolute; 
-top: 20%; 
-left: 50%; 
-transform: translate(-50%, -50%); 
-text-align: center;
-}
 
 /* текст */
 h1{
