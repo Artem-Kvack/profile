@@ -1,0 +1,128 @@
+body{
+margin:0;
+padding:0;
+height:100%;
+overflow:hidden;
+font-family:'Iosevka Charon Mono', monospace;
+
+user-select:none;
+-webkit-user-select:none;
+-moz-user-select:none;
+}
+
+/* видео фон */
+#bg-video{
+position:fixed;
+top:0;
+left:0;
+width:100vw;
+height:100vh;
+object-fit:cover;
+z-index:-2;
+}
+
+/* затемнение */
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+z-index:-1;
+}
+
+/* центральный профиль */
+.prof{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%, -50%);
+text-align:center;
+
+padding:30px;
+width:350px;
+
+color:white;
+
+background:rgba(0,0,0,0.4);
+backdrop-filter:blur(10px);
+
+border-radius:20px;
+}
+
+/* аватарка */
+.mysz{
+width:90px;
+height:90px;
+border-radius:50%;
+margin-bottom:15px;
+}
+
+/* логотип */
+.logo{
+width:10%;
+
+position: absolute; 
+top: 20%; 
+left: 50%; 
+transform: translate(-50%, -50%); 
+text-align: center;
+}
+
+/* текст */
+h1{
+font-size:22px;
+margin:10px 0;
+}
+
+p{
+font-size:14px;
+opacity:0.8;
+}
+/* плеер */
+.volume-control{
+position:fixed;
+top:20px;
+left:20px;
+
+display:flex;
+align-items:center;
+gap:10px;
+
+background:rgba(30,30,30,0.8);
+padding:10px 15px;
+
+border-radius:12px;
+
+backdrop-filter:blur(6px);
+}
+
+.volume-control input{
+width:180px;
+cursor:pointer;
+}
+
+.icon{
+font-size:18px;
+color:white;
+}
+#enter{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:black;
+color:white;
+
+font-size:40px;
+cursor:pointer;
+
+z-index:999;
+}

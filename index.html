@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@tihiy_gosty</title>
+    <link rel="icon" href="mysz_ico.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Iosevka+Charon+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styl.css">
+
+</head>
+<body>
+     <div id="enter">
+Click to enter
+</div>
+      <audio autoplay loop id="music" muted>
+<source src="fon_music.mp3" type="audio/mp3">
+</audio>
+<div class="volume-control">
+<span class="icon">🔊</span>
+<input type="range" id="volumeControl" min="0" max="1" step="0.01">
+</div>
+<video autoplay muted loop id="bg-video">
+<source src="fon.mp4" type="video/mp4">
+</video>
+<div class="overlay"></div>
+<img src="777.gif" alt="" class="logo">
+    <div class="prof">
+        
+        <img src="kal.jpg" alt="Мышь в ребусе" class="mysz">
+        <div class="overlay2"></div>
+        <h1>Мышь в ребусе</h1>
+        <p>мышь которая в ребусе попавшая через запятую в наш мир со слоном в конце</p>
+        <div class="views">
+👁 <span id="viewCount">0</span>
+</div>
+    </div>
+ 
+<script>
+let viewed = localStorage.getItem("viewed");
+let views = localStorage.getItem("views");
+
+if(!views){
+views = 0;
+}
+
+if(!viewed){
+views++;
+localStorage.setItem("views", views);
+localStorage.setItem("viewed", true);
+}
+
+document.getElementById("viewCount").textContent = views;
+
+
+</script>
+<script>
+const enter = document.getElementById("enter");
+const music = document.getElementById("music");
+const volumeControl = document.getElementById("volumeControl");
+
+// Устанавливаем начальную громкость
+music.volume = 1;
+volumeControl.value = 1;
+
+// Попытка автозапуска музыки при загрузке страницы
+window.addEventListener("load", () => {
+    music.muted = false; // снимаем mute
+    music.play().catch(e => {
+        console.log("Автозапуск заблокирован браузером:", e);
+    });
+});
+
+// Управление громкостью через ползунок
+volumeControl.addEventListener("input", () => {
+    music.volume = volumeControl.value;
+});
+
+// Кнопка "Click to enter" – включение музыки и скрытие кнопки
+enter.addEventListener("click", () => {
+    music.volume = 1;
+    music.play();
+    enter.style.display = "none";
+});
+
+// Запрет перетаскивания элементов на странице
+document.addEventListener("dragstart", e => e.preventDefault());
+
+</script>
+<script>
+const siteTitle = "@tihiy_gosty"; // Текст для вкладки
+let index = 0;
+let forward = true; // true — печатаем, false — стираем
+
+function animateTitle() {
+    if (forward) {
+        // Печатаем по буквам
+        document.title = siteTitle.slice(0, index + 1);
+        index++;
+        if (index === siteTitle.length) forward = false; // достигли конца → начинаем стирать
+    } else {
+        // Стираем по буквам
+        document.title = siteTitle.slice(0, index - 1);
+        index--;
+        if (index === 0) forward = true; // достигли начала → начинаем печатать
+    }
+
+    setTimeout(animateTitle, 200); // скорость эффекта (мс между буквами)
+}
+
+// Запуск анимации при загрузке страницы
+window.addEventListener("load", animateTitle);
+</script>
+</body>
+</html>
