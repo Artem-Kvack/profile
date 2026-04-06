@@ -34,7 +34,7 @@ z-index:-1;
 
 /* центральный профиль */
 .prof{
-position:absolute;
+position:fixed;
 top:50%;
 left:50%;
 text-align:center;
