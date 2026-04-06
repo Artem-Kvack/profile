@@ -27,6 +27,7 @@ Click to enter
 </video>
 <div class="overlay"></div>
 
+    <div class="prof-wrap">
     <div class="prof">
         
         <img src="kal.jpg" alt="Мышь в ребусе" class="mysz">
@@ -36,6 +37,7 @@ Click to enter
         <div class="views">
 👁 <span id="viewCount">0</span>
 </div>
+    </div>
     </div>
  
 <script>
@@ -116,6 +118,7 @@ window.addEventListener("load", animateTitle);
 <script>
 (function () {
     const card = document.querySelector(".prof");
+    const wrap = document.querySelector(".prof-wrap");
 
     // --- состояние ---
     let rotX = 0, rotY = 0;       // текущий наклон
@@ -148,7 +151,7 @@ window.addEventListener("load", animateTitle);
             + Math.sin(time * FLOAT_FREQ * 1.65) * 2.5;
 
         card.style.transform =
-            `perspective(900px) translate(-50%, calc(-50% + ${floatY}px)) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+            `translateY(${floatY}px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
 
         requestAnimationFrame(tick);
     }
