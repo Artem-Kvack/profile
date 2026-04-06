@@ -32,11 +32,18 @@ background:rgba(0,0,0,0.7);
 z-index:-1;
 }
 
-/* центральный профиль */
-.prof{
+/* враппер — чистое CSS центрирование, никогда не трогается JS */
+.prof-wrap{
 position:fixed;
 top:50%;
 left:50%;
+transform:translate(-50%,-50%);
+perspective:900px;
+}
+
+/* центральный профиль */
+.prof{
+position:relative;
 text-align:center;
 padding:40px;
 width:420px;
