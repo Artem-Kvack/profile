@@ -113,5 +113,63 @@ function animateTitle() {
 // Запуск анимации при загрузке страницы
 window.addEventListener("load", animateTitle);
 </script>
+<script>
+(function () {
+    const card = document.querySelector(".prof");
+
+    // --- состояние ---
+    let rotX = 0, rotY = 0;       // текущий наклон
+    let velX = 0, velY = 0;       // скорость
+    let tgtX = 0, tgtY = 0;       // цель
+    let hovered = false;
+    let lastT = null;
+
+    // --- параметры физики ---
+    const STIFFNESS  = 0.12;  // жёсткость пружины
+    const DAMPING    = 0.60;  // затухание — меньше = желейнее
+    const MAX_TILT   = 16;    // градусов
+    const FLOAT_AMP  = 10;    // пиксель float-амплитуды
+    const FLOAT_FREQ = 0.0007; // частота float
+
+    function tick(time) {
+        if (!lastT) lastT = time;
+        const dt = Math.min((time - lastT) / 16.67, 4); // нормируем к 60fps
+        lastT = time;
+
+        // пружинная физика
+        velX = (velX + (tgtX - rotX) * STIFFNESS * dt) * Math.pow(DAMPING, dt);
+        velY = (velY + (tgtY - rotY) * STIFFNESS * dt) * Math.pow(DAMPING, dt);
+        rotX += velX;
+        rotY += velY;
+
+        // float на базе синуса — две частоты = органичное покачивание
+        const floatY = hovered ? 0
+            : Math.sin(time * FLOAT_FREQ) * FLOAT_AMP
+            + Math.sin(time * FLOAT_FREQ * 1.65) * 2.5;
+
+        card.style.transform =
+            `perspective(900px) translate(-50%, calc(-50% + ${floatY}px)) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+
+        requestAnimationFrame(tick);
+    }
+
+    card.addEventListener("mousemove", (e) => {
+        const r = card.getBoundingClientRect();
+        const nx = (e.clientX - r.left) / r.width  * 2 - 1; // -1..1
+        const ny = (e.clientY - r.top)  / r.height * 2 - 1; // -1..1
+        tgtX = -ny * MAX_TILT;
+        tgtY =  nx * MAX_TILT;
+        hovered = true;
+    });
+
+    card.addEventListener("mouseleave", () => {
+        tgtX = 0;
+        tgtY = 0;
+        hovered = false;
+    });
+
+    requestAnimationFrame(tick);
+}());
+</script>
 </body>
 </html>
